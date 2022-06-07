@@ -7,7 +7,7 @@ const ticketControl=new TicketControl();
 io.on('connection', (client) => {
     client.on('nextTicket',(data,callback)=>{
         const nextTicket=ticketControl.nextTicket();
-        console.log(nextTicket);
+        console.log(client);
         callback(nextTicket);
     });
 
