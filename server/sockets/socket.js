@@ -7,9 +7,10 @@ const ticketControl=new TicketControl();
 io.on('connection', (client) => {
     client.on('nextTicket',(data,callback)=>{
         const nextTicket=ticketControl.nextTicket();
-        console.log(client);
         callback(nextTicket);
     });
+
+    client.emit('msg', 'bienvenido')
 
     client.emit('ticketStatus',{
         current:ticketControl.getLastTicket(),

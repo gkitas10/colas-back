@@ -6,10 +6,6 @@ const cors = require('cors');
 const path = require('path');
 
 const app = express();
-// const corsOptions = {
-//     origin: 'https://localhost:3000',
-//     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-//   }
 
 app.use(cors())
 let server = http.createServer(app);
@@ -22,7 +18,7 @@ app.use(express.static(publicPath));
 // IO = esta es la comunicacion del backend
 module.exports.io = socketIO(server, {
         cors: {
-          origin: "http://localhost:3000",
+          origin: "*",
           methods: ["GET", "POST"]
         }
 });
