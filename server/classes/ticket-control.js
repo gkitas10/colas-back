@@ -18,6 +18,7 @@ class TicketControl{
         if(data.currentDay===this.currentDay){
             this.lastTicket=data.lastTicket;
             this.tickets=data.tickets;
+            this.last4 = data.last4;
         }else{
             this.resetCount();
         }
@@ -29,6 +30,10 @@ class TicketControl{
         this.tickets.push(ticket);
         this.saveFile();
         return `Ticket ${this.lastTicket}`;
+    }
+
+    getTickets() {
+        return this.tickets;
     }
 
     getLastTicket(){
@@ -44,9 +49,12 @@ class TicketControl{
             return 'There are no tickets'
         }
 
-        let ticketAssigned=new Ticket(this.tickets[0].number,computer);
-        this.tickets.shift();
-        this.last4.unshift(ticketAssigned);
+        let ticketAssigned = this.tickets.shift()
+        ticketAssigned.computer = computer;
+        this.last4.unshift(ticketAssigned)
+        // let ticketAssigned=new Ticket(this.tickets[0].number,computer);
+        // this.tickets.shift();
+        // this.last4.unshift(ticketAssigned);
 
         if(this.last4.length>4){
             this.last4.splice(-1,1);

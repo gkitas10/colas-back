@@ -10,12 +10,23 @@ io.on('connection', (client) => {
         callback(nextTicket);
     });
 
-    client.emit('msg', 'bienvenido')
-
     client.emit('ticketStatus',{
         current:ticketControl.getLastTicket(),
         last4:ticketControl.getLast4()
     });
+
+    client.emit('ticket-queue', ticketControl.getTickets().length);
+
+    client.on('get-queue',(data,callback)=>{
+        console.log(data);
+        callback(ticketControl.getTickets().length)
+    })
+
+    client.on('get-status',(data,callback)=>{
+        console.log(data);
+        callback({current:ticketControl.getLastTicket(),
+            last4:ticketControl.getLast4()})
+    })
 
     client.on('assignTicket',(data,callback)=>{
         if(!data.computer){
@@ -30,5 +41,9 @@ io.on('connection', (client) => {
             client.broadcast.emit('last4', {
                 last4:ticketControl.getLast4()
             })
+
+            // client.emit('ticket-queue', {
+            //     tickets:ticketControl.getTickets()
+            // })
     });
 });
