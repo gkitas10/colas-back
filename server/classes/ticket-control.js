@@ -29,7 +29,7 @@ class TicketControl{
         let ticket=new Ticket(this.lastTicket,null);
         this.tickets.push(ticket);
         this.saveFile();
-        return `Ticket ${this.lastTicket}`;
+        return this.lastTicket;
     }
 
     getTickets() {
