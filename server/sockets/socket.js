@@ -15,7 +15,7 @@ io.on('connection', (client) => {
         last4:ticketControl.getLast4()
     });
 
-    client.emit('ticket-queue', ticketControl.getTickets().length);
+    // client.emit('ticket-queue', ticketControl.getTickets().length);
 
     client.on('get-queue',(data,callback)=>{
         console.log(data);
@@ -42,8 +42,7 @@ io.on('connection', (client) => {
                 last4:ticketControl.getLast4()
             })
 
-            // client.emit('ticket-queue', {
-            //     tickets:ticketControl.getTickets()
-            // })
+         client.emit('ticket-queue', ticketControl.getTickets().length);
+
     });
 });
